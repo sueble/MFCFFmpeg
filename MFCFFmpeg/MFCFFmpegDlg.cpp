@@ -6,6 +6,8 @@
 #include "MFCFFmpeg.h"
 #include "MFCFFmpegDlg.h"
 #include "afxdialogex.h"
+#include"iostream"
+using namespace std;
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -69,6 +71,7 @@ void CMFCFFmpegDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDITVideoPath, mVideoPath);
+	DDX_Control(pDX, IDC_EDITVideoPath, mVideoEdit);
 }
 
 BEGIN_MESSAGE_MAP(CMFCFFmpegDlg, CDialogEx)

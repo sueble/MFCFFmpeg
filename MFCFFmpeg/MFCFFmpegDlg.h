@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include "afxwin.h"
 
 
 // CMFCFFmpegDlg dialog
@@ -34,4 +35,5 @@ protected:
 public:
 	afx_msg void OnBnClickedOk();
 	CString mVideoPath;
+	CEdit mVideoEdit;
 };
