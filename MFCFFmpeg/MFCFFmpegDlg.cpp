@@ -11,6 +11,15 @@
 #define new DEBUG_NEW
 #endif
 
+#define __STDC_CONSTANT_MACROS
+extern "C" {
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#include <libswscale/swscale.h>
+#include <libavutil/imgutils.h>
+#include <libswresample/swresample.h>
+}
+
 
 // CAboutDlg dialog used for App About
 
@@ -51,6 +60,7 @@ END_MESSAGE_MAP()
 
 CMFCFFmpegDlg::CMFCFFmpegDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_MFCFFMPEG_DIALOG, pParent)
+	, mVideoPath(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -58,12 +68,14 @@ CMFCFFmpegDlg::CMFCFFmpegDlg(CWnd* pParent /*=NULL*/)
 void CMFCFFmpegDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Text(pDX, IDC_EDITVideoPath, mVideoPath);
 }
 
 BEGIN_MESSAGE_MAP(CMFCFFmpegDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDOK, &CMFCFFmpegDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -150,5 +162,21 @@ void CMFCFFmpegDlg::OnPaint()
 HCURSOR CMFCFFmpegDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
+}
+
+
+UINT Thread_Play(LPVOID lpParam) {
+	return 0;
+}
+void CMFCFFmpegDlg::OnBnClickedOk()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if (mVideoPath.IsEmpty())
+	{
+		MessageBox(TEXT("请选择视频文件路径"));
+		return;
+	}
+	AfxBeginThread(Thread_Play, this);
+	//CDialogEx::OnOK();
 }
 
