@@ -68,7 +68,7 @@ CMFCFFmpegDlg::CMFCFFmpegDlg(CWnd* pParent /*=NULL*/)
 	, mVideoPath(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	mVideoPath = "C:\\Users\\Administrator\\Videos\\1.mp4";
+	mVideoPath = "rtsp://192.168.0.100:554/user=admin&password=&channel=1&stream=0.sdp?real_stream";
 }
 
 void CMFCFFmpegDlg::DoDataExchange(CDataExchange* pDX)
